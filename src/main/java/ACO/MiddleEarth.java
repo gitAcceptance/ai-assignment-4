@@ -36,7 +36,7 @@ public class MiddleEarth {
         
         // Add edges (roads) to the cities (nodes)
         for (Connection c : connections) {
-            Road r = new Road(c.getDistance(), c.getRoadQuality(), c.getRiskLevel());
+            Road r = new Road(c.getDistance());
             world.addEdge(c.getFrom(), c.getTo(), r);
         }
     }
