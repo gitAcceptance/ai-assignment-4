@@ -84,6 +84,7 @@ public class ACO {
 
                     // Create new connection object
                     newConnection = new Connection(cities.get(fromCityName), cities.get(toCityName), distanceInMiles, roadQuality, riskLevel);
+                    
 
                     // Add connect object to arraylist
                     connections.add(newConnection);
@@ -119,6 +120,8 @@ public class ACO {
 
         readInFileEstimatedDistanceToGoal(newCity);
         readInPointToPointInformation(newConnection);
+        
+        MiddleEarth me = new MiddleEarth(cities, connections);
         
         
         

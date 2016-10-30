@@ -22,8 +22,8 @@ public class MiddleEarth {
     /**
     *   Constructor for the MiddleEarth object
     *
-    *   @param Hashmap of cities (nodes)
-    *   @param Connections to those cities (edges)
+    *   @param cities Hashmap of cities (nodes)
+    *   @param connections Connections to those cities (edges)
     *   
     **/
     public MiddleEarth(HashMap<String, City> cities, ArrayList<Connection> connections) {
@@ -44,8 +44,8 @@ public class MiddleEarth {
     /**
     *   Determines the distance between 2 cities
     *
-    *   @param The city you want the distance from
-    *   @param The city you want the distance to
+    *   @param from The city you want the distance from
+    *   @param to The city you want the distance to
     *   @return The distance between two cities
     *   
     **/
@@ -56,8 +56,8 @@ public class MiddleEarth {
     /**
     *   Determines the quality between 2 cities
     *
-    *   @param The city you want the quality from
-    *   @param The city you want the quality to
+    *   @param from The city you want the quality from
+    *   @param to The city you want the quality to
     *   @return The quality between two cities
     *   
     **/
@@ -68,19 +68,31 @@ public class MiddleEarth {
     /**
     *   Determines the risk between 2 cities
     *
-    *   @param The city you want the risk from
-    *   @param The city you want the risk to
+    *   @param from The city you want the risk from
+    *   @param to The city you want the risk to
     *   @return The risk between two cities
     *   
     **/
     public int riskBetween(City from, City to) {
         return world.getEdge(from, to).getDistance();
     }
+    
+    /**
+     *   Returns a reference to the road between the given cities.
+     *
+     *   @param from The city you want the risk from
+     *   @param to The city you want the risk to
+     *   @return The risk between two cities
+     *   
+     **/
+     public int roadBetween(City from, City to) {
+         return world.getEdge(from, to).getDistance();
+     }
 
     /**
-    *   Hashset of the roads attached to a given city
+    *   Returns a Hashset containing references the roads attached to a given city.
     *
-    *   @param The city of the desired edges
+    *   @param location The city of the desired edges
     *   @return The hashset of roads attached to the city
     *   
     **/

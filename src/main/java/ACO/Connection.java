@@ -1,9 +1,8 @@
 /**
- *  Filename: MiddleEarth.java
+ *  Filename: Connection.java
  *  Authors: Jesse Peplinski and Andrew Valancius
  *  Course: CIS 421 ­ Artificial Intelligence
- *  Assignment: 3
- *  Due: 10/24/2016, 11:00 PM
+ *  Due: 10/24/2016
  **/
 
 package ACO;
@@ -19,11 +18,11 @@ public class Connection {
     /**
     *   Constructor for the connection object from table 2 point to point info
     *
-    *   @param The city you are from
-    *   @param The city you are going to
-    *   @param The distance from table 2
-    *   @param The road quality from table 2
-    *   @param The risk level  from table 2
+    *   @param from The city you are from
+    *   @param to The city you are going to
+    *   @param distance The distance from table 2
+    *   @param roadQuality The road quality from table 2
+    *   @param riskLevel The risk level  from table 2
     *   
     **/
     public Connection(City from, City to, int distance, int roadQuality, int riskLevel) {
