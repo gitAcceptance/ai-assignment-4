@@ -13,8 +13,7 @@ import org.jgrapht.graph.DefaultEdge;
 public class Road extends DefaultEdge {
     
     private final int distance;
-    private final int roadQuality;
-    private final int riskLevel;
+    private int pheromoneLevel;
 
     /**
      * 
@@ -26,14 +25,13 @@ public class Road extends DefaultEdge {
     *   Constructor for the road object that is created from the connection
     *
     *   @param The distance
-    *   @param The road quality
-    *   @param the risk level
+    *   @param The pheromone level
     *   
     **/
-    public Road(int d, int q, int r) {
+    public Road(int d) {
         this.distance = d;
-        this.roadQuality = q;
-        this.riskLevel = r;
+        this.pheromoneLevel = 0;
+
     }
     
     /**
@@ -62,11 +60,9 @@ public class Road extends DefaultEdge {
         return distance;
     }
 
-    public int getRoadQuality() {
-        return roadQuality;
-    }
+	public int getPheromoneLevel() {
+		return pheromoneLevel;
+	}
 
-    public int getRiskLevel() {
-        return riskLevel;
-    }
+    
 }
