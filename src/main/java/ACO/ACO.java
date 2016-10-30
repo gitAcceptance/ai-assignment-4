@@ -105,15 +105,23 @@ public class ACO {
 
 
 
-
+    public ArrayList<City> ACO(City start, City end, float alpha, float beta, float rho, float q) {
+    	// TODO Implement this.
+    	return null;
+    }
 
 
 
     public void run(String[] args) {
 
+    	City newCity = null;
+        Connection newConnection = null;
 
-
-
+        readInFileEstimatedDistanceToGoal(newCity);
+        readInPointToPointInformation(newConnection);
+        
+        
+        
 
         
     }
