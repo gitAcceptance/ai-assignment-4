@@ -54,39 +54,15 @@ public class MiddleEarth {
     }
     
     /**
-    *   Determines the quality between 2 cities
-    *
-    *   @param from The city you want the quality from
-    *   @param to The city you want the quality to
-    *   @return The quality between two cities
-    *   
-    **/
-    public int qualityBetween(City from, City to) {
-        return world.getEdge(from, to).getDistance();
-    }
-
-    /**
-    *   Determines the risk between 2 cities
-    *
-    *   @param from The city you want the risk from
-    *   @param to The city you want the risk to
-    *   @return The risk between two cities
-    *   
-    **/
-    public int riskBetween(City from, City to) {
-        return world.getEdge(from, to).getDistance();
-    }
-    
-    /**
      *   Returns a reference to the road between the given cities.
      *
-     *   @param from The city you want the risk from
-     *   @param to The city you want the risk to
+     *   @param from The city at one end of the road
+     *   @param to The city at the other end of the road
      *   @return The risk between two cities
      *   
      **/
-     public int roadBetween(City from, City to) {
-         return world.getEdge(from, to).getDistance();
+     public Road getRoad(City from, City to) {
+         return world.getEdge(from, to);
      }
 
     /**

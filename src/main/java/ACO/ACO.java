@@ -105,13 +105,29 @@ public class ACO {
     }
 
 
-
-    public ArrayList<City> ACO(City start, City end, float alpha, float beta, float rho, float q) {
+    /**
+     * Generate a path between the given cities using the given parameters
+     * 
+     * @param start The city we're starting at.
+     * @param end The city we want to end up at.
+     * @param alpha Weight of pheromone
+     * @param beta Weight of heuristic measure
+     * @param rho Trail persistence
+     * @param q quantity of pheromone deposited on trail.
+     * @return An ArrayList representing the path the ACO found
+     */
+    public ArrayList<City> optimize(City start, City end, float alpha, float beta, float rho, float q) {
     	// TODO Implement this.
     	return null;
     }
 
-
+    public void applyPheromones() {
+    	// TODO apply the pheromones to each road
+    }
+    
+    public void evaporatePheromones() {
+    	// TODO evaporate the pheromones to each road
+    }
 
     public void run(String[] args) {
 
@@ -121,11 +137,19 @@ public class ACO {
         readInFileEstimatedDistanceToGoal(newCity);
         readInPointToPointInformation(newConnection);
         
-        MiddleEarth me = new MiddleEarth(cities, connections);
+        MiddleEarth antMap = new MiddleEarth(cities, connections);
         
         
-        
+        ArrayList<Ant> antPop = new ArrayList<Ant>(); // init empty ant population
+        for (int i = 0; i < 10; i++) { // add 10 ants to the population
+        	antPop.add(new Ant(this.cities.get("Blue_Mountains"), this.cities.get("Iron_Hills"), antMap));
+        }
 
+        // big while loop
+        
+        
+        
+        // end big while
         
     }
 
