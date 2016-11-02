@@ -137,6 +137,10 @@ public class ACO {
     	// TODO Implement this.
     	return null;
     }
+    
+    /**
+     * places random initial pheromone levels across every edge 
+     */
 
     public void initPheromones() {
     	for (Road r : this.antMap.getAllRoads()) {
