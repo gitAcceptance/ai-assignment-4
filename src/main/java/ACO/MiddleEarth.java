@@ -90,6 +90,17 @@ public class MiddleEarth {
     }
     
     /**
+     *   Returns a Hashset containing references the all the roads.
+     *
+     *   @return The hashset of all the roads
+     *   
+     **/
+     public HashSet<Road> getAllRoads() {
+         HashSet<Road> roads = new HashSet<Road>(world.edgeSet());
+         return roads;
+     }
+    
+    /**
      *   Returns the number of cities on the map
      *
      *   @return int value representing the number of cities in the graph
