@@ -34,7 +34,7 @@ public class Road extends DefaultEdge {
 
     }
     
-    /**
+	/**
     *   Get the city of where the road started
     *
     *   @return The source city
@@ -60,6 +60,10 @@ public class Road extends DefaultEdge {
         return distance;
     }
 
+    public void setPheromoneLevel(int pheromoneLevel) {
+		this.pheromoneLevel = pheromoneLevel;
+	}
+    
 	public int getPheromoneLevel() {
 		return pheromoneLevel;
 	}
