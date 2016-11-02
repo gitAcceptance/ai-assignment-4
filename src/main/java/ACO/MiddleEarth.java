@@ -61,7 +61,7 @@ public class MiddleEarth {
     *   @return The pheromone between two cities
     *   
     **/
-    public int pheromoneBetween(City from, City to) {
+    public float pheromoneBetween(City from, City to) {
         return world.getEdge(from, to).getPheromoneLevel();
     }
     

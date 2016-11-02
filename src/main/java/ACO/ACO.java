@@ -4,6 +4,7 @@ package ACO;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ACO {
@@ -123,16 +124,28 @@ public class ACO {
     	return null;
     }
 
-    public void applyPheromones() {
-    	// TODO apply the pheromones to each road
-   
-    		
-    
+    public void initPheromones() {
     	
+    	for (Road r : this.antMap.getAllRoads()) {
+    	    r.setPheromoneLevel(randomer(antMap.numberOfCities()));
+    	}	
     }
+    
+    public int randomer(int n) {
+        
+        Random rand = new Random();
+        int randomiser = rand.nextInt(n);
+        return randomiser;
+    }
+    
+    
     
     public void evaporatePheromones() {
     	// TODO evaporate the pheromones to each road
+    	for (Road r : this.antMap.getAllRoads()) {
+    	    r.evaporate(5);
+    	}
+    	
     }
 
     public void run(String[] args) {

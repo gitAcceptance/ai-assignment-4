@@ -13,7 +13,7 @@ import org.jgrapht.graph.DefaultEdge;
 public class Road extends DefaultEdge {
     
     private final int distance;
-    private int pheromoneLevel;
+    private float pheromoneLevel;
 
     /**
      * 
@@ -55,6 +55,10 @@ public class Road extends DefaultEdge {
     public City getTarget() {
         return (City) super.getTarget();
     }
+    
+    public void evaporate(float rho) {
+    	this.pheromoneLevel = this.pheromoneLevel * (1 - rho);    	
+    }
 
     public int getDistance() {
         return distance;
@@ -64,7 +68,7 @@ public class Road extends DefaultEdge {
 		this.pheromoneLevel = pheromoneLevel;
 	}
     
-	public int getPheromoneLevel() {
+	public float getPheromoneLevel() {
 		return pheromoneLevel;
 	}
 
