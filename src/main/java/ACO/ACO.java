@@ -9,9 +9,23 @@ import java.util.Scanner;
 
 public class ACO {
     
-    HashMap<String, City> cities = new HashMap<String, City>();
-    ArrayList<Connection> connections = new ArrayList<Connection>();
-    MiddleEarth antMap = new MiddleEarth(cities, connections);
+    HashMap<String, City> cities;
+    ArrayList<Connection> connections;
+    MiddleEarth antMap;
+    Random rand;
+    
+    float alpha, beta, rho, q;
+    
+    public ACO(float alpha, float beta, float rho, float q) {
+    	cities = new HashMap<String, City>();
+        connections = new ArrayList<Connection>();
+    	rand = new Random();
+    	
+    	this.alpha = alpha;
+    	this.beta = beta;
+    	this.rho = rho;
+    	this.q = q;
+    }
     
 
     public void readInFileEstimatedDistanceToGoal(City newCity) {
@@ -125,27 +139,15 @@ public class ACO {
     }
 
     public void initPheromones() {
-    	
     	for (Road r : this.antMap.getAllRoads()) {
-    	    r.setPheromoneLevel(randomer(antMap.numberOfCities()));
+    	    r.setPheromoneLevel(rand.nextInt(antMap.numberOfCities()));
     	}	
     }
     
-    public int randomer(int n) {
-        
-        Random rand = new Random();
-        int randomiser = rand.nextInt(n);
-        return randomiser;
-    }
-    
-    
-    
     public void evaporatePheromones() {
-    	// TODO evaporate the pheromones to each road
     	for (Road r : this.antMap.getAllRoads()) {
-    	    r.evaporate(5);
+    	    r.evaporate(5); // TODO pass rho into evaporate()
     	}
-    	
     }
 
     public void run(String[] args) {
@@ -158,10 +160,9 @@ public class ACO {
         
         this.antMap = new MiddleEarth(cities, connections);
         
-        
         ArrayList<Ant> antPop = new ArrayList<Ant>(); // init empty ant population
         for (int i = 0; i < 10; i++) { // add 10 ants to the population
-        	antPop.add(new Ant(this.cities.get("Blue_Mountains"), this.cities.get("Iron_Hills"), antMap));
+        	antPop.add(new Ant(this.cities.get("Blue_Mountains"), this.cities.get("Iron_Hills"), antMap, alpha, beta));
         }
 
         // big while loop
@@ -173,8 +174,8 @@ public class ACO {
     }
 
     public static void main(String[] args) {
-        ACO ant = new ACO();
-        ant.run(args);
+        ACO configuration1 = new ACO(1, 1, 1, 1); // TODO input correct values for each run
+        configuration1.run(args);
     }
 
 }

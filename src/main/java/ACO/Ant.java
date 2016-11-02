@@ -11,17 +11,18 @@ public class Ant {
 	ArrayList<Road> traversedLinks;
 	ArrayList<City> vistedCities;
 	MiddleEarth map;
-	City start;
-	City goal;
-	City currentLocation;
+	City start, goal, currentLocation;
+	float alpha, beta;
 	
-	public Ant(City start, City goal, MiddleEarth m) {
+	public Ant(City start, City goal, MiddleEarth m, float alpha, float beta) {
 		traversedLinks = new ArrayList<Road>();
 		vistedCities = new ArrayList<City>();
 		this.start = start;
 		this.currentLocation = start;
 		this.goal = goal;
 		this.map = m;
+		this.alpha = alpha;
+		this.beta = beta;
 	}
 	
 	public void step() {
