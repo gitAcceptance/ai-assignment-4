@@ -1,4 +1,4 @@
-
+ 
 
 
 
@@ -8,14 +8,16 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Ant {
-	ArrayList<City> visitedCities; // TODO make this keep track of traversed links,rather than visited cities
+	ArrayList<Road> traversedLinks;
+	ArrayList<City> vistedCities;
 	MiddleEarth map;
 	City start;
 	City goal;
 	City currentLocation;
 	
 	public Ant(City start, City goal, MiddleEarth m) {
-		visitedCities = new ArrayList<City>();
+		traversedLinks = new ArrayList<Road>();
+		vistedCities = new ArrayList<City>();
 		this.start = start;
 		this.currentLocation = start;
 		this.goal = goal;
@@ -24,7 +26,7 @@ public class Ant {
 	
 	public void step() {
 		// TODO make sure the ants try to no go back to a place they've already visited
-		// TODO add the new city to the list of cities you've visited
+
 		Road smelliestRoad = null;
 		for (Road r : map.getRoads(currentLocation)) {
 			if (smelliestRoad == null) {
@@ -39,6 +41,11 @@ public class Ant {
 			nextCity = smelliestRoad.getTarget();
 		}
 		this.currentLocation = nextCity;
+		
+		traversedLinks.add(smelliestRoad);
+		
+		
+		
 	}
 	
 	public boolean isAtGoal() {

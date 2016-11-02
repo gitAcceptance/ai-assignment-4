@@ -10,6 +10,8 @@ public class ACO {
     
     HashMap<String, City> cities = new HashMap<String, City>();
     ArrayList<Connection> connections = new ArrayList<Connection>();
+    MiddleEarth antMap = new MiddleEarth(cities, connections);
+    
 
     public void readInFileEstimatedDistanceToGoal(City newCity) {
         try {
@@ -123,6 +125,10 @@ public class ACO {
 
     public void applyPheromones() {
     	// TODO apply the pheromones to each road
+   
+    		
+    
+    	
     }
     
     public void evaporatePheromones() {
@@ -137,7 +143,7 @@ public class ACO {
         readInFileEstimatedDistanceToGoal(newCity);
         readInPointToPointInformation(newConnection);
         
-        MiddleEarth antMap = new MiddleEarth(cities, connections);
+        this.antMap = new MiddleEarth(cities, connections);
         
         
         ArrayList<Ant> antPop = new ArrayList<Ant>(); // init empty ant population

@@ -54,6 +54,18 @@ public class MiddleEarth {
     }
     
     /**
+    *   Determines the pheromone Level between 2 cities
+    *
+    *   @param from The city you want the distance from
+    *   @param to The city you want the distance to
+    *   @return The pheromone between two cities
+    *   
+    **/
+    public int pheromoneBetween(City from, City to) {
+        return world.getEdge(from, to).getPheromoneLevel();
+    }
+    
+    /**
      *   Returns a reference to the road between the given cities.
      *
      *   @param from The city at one end of the road
