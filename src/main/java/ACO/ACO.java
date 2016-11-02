@@ -123,6 +123,10 @@ public class ACO {
     	// TODO Implement this.
     	return null;
     }
+    
+    /**
+     * places random initial pheromone levels across every edge 
+     */
 
     public void initPheromones() {
     	
@@ -131,6 +135,11 @@ public class ACO {
     	}	
     }
     
+    /**
+     * @param n a max number to random to
+     * @return the number generated 
+     */
+    
     public int randomer(int n) {
         
         Random rand = new Random();
@@ -138,10 +147,12 @@ public class ACO {
         return randomiser;
     }
     
-    
+    /**
+     * Evaporated the rho value for every road in the antMap
+     */
     
     public void evaporatePheromones() {
-    	// TODO evaporate the pheromones to each road
+
     	for (Road r : this.antMap.getAllRoads()) {
     	    r.evaporate(5);
     	}
