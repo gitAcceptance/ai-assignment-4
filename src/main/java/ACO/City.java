@@ -73,7 +73,7 @@ public class City {
     *   
     **/
     public String toString() {
-        return "CITY NAME: " + cityName + " | DISTANCE TO IRON HILLS: " + distanceToIronHills;
+        return "CITY NAME: " + cityName;
     }
 
 	public City getCameFrom() {

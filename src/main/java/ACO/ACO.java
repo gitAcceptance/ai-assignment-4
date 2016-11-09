@@ -14,9 +14,9 @@ public class ACO {
     MiddleEarth antMap;
     Random rand;
     
-    float alpha, beta, rho, q;
+    double alpha, beta, rho, q;
     
-    public ACO(float alpha, float beta, float rho, float q) {
+    public ACO(double alpha, double beta, double rho, double q) {
     	cities = new HashMap<String, City>();
         connections = new ArrayList<Connection>();
     	rand = new Random();
@@ -49,7 +49,7 @@ public class ACO {
                 // Create new city object
                 newCity = new City(cityName, distanceToIronHills);
 
-                // Add ciiy object to arraylist
+                // Add city object to arraylist
                 cities.put(cityName, newCity);
             }
         }
@@ -133,7 +133,7 @@ public class ACO {
      * @param q quantity of pheromone deposited on trail.
      * @return An ArrayList representing the path the ACO found
      */
-    public ArrayList<City> optimize(City start, City end, float alpha, float beta, float rho, float q) {
+    public ArrayList<City> optimize(City start, City end, double alpha, double beta, double rho, double q) {
     	// TODO Implement this.
     	return null;
     }
@@ -144,17 +144,21 @@ public class ACO {
 
     public void initPheromones() {
     	for (Road r : this.antMap.getAllRoads()) {
-    	    r.setPheromoneLevel(rand.nextInt(antMap.numberOfCities()));
+    	    r.setPheromoneLevel(rand.nextDouble() * 3.0); // TODO Is this correct?
     	}	
+    }
+    
+    public void applyPheromones() {
+        // TODO apply the pheromones
     }
     
     public void evaporatePheromones() {
     	for (Road r : this.antMap.getAllRoads()) {
-    	    r.evaporate(5); // TODO pass rho into evaporate()
+    	    r.evaporate(rho);
     	}
     }
 
-    public void run(String[] args) {
+    public void run() {
 
     	City newCity = null;
         Connection newConnection = null;
@@ -163,23 +167,68 @@ public class ACO {
         readInPointToPointInformation(newConnection);
         
         this.antMap = new MiddleEarth(cities, connections);
+        this.initPheromones();
         
         ArrayList<Ant> antPop = new ArrayList<Ant>(); // init empty ant population
-        for (int i = 0; i < 10; i++) { // add 10 ants to the population
-        	antPop.add(new Ant(this.cities.get("Blue_Mountains"), this.cities.get("Iron_Hills"), antMap, alpha, beta));
-        }
+        
 
-        // big while loop
+        int cycle = 0;
+        
+        while (cycle < 25) {
+            antPop.clear();
+            for (int i = 0; i < 10; i++) { // add 10 ants to the population
+                antPop.add(new Ant(this.cities.get("Blue_Mountains"), this.cities.get("Iron_Hills"), antMap, alpha, beta));
+            }
+            for (Ant a : antPop) {
+                a.takeTrip();
+            }
+            cycle++;
+            this.evaporatePheromones();
+            
+        }
+        
+        System.out.println("we made it");
         
         
+        int antLabel = 1;
+        for (Ant a : antPop) {
+            System.out.println("Ant " + antLabel + ": ");
+            for (City c : a.vistedCities) {
+                System.out.print(c.toString() + " -> ");
+            }
+            antLabel++;
+            System.out.println();
+        }
         
-        // end big while
+        // TODO print out the path
+        
+        // TODO log the path
         
     }
 
     public static void main(String[] args) {
-        ACO configuration1 = new ACO(1, 1, 1, 1); // TODO input correct values for each run
-        configuration1.run(args);
+        // java ACO <alpha> <beta> <rho> <q>
+        ACO configuration1 = null;
+    	
+        if (args.length == 4) {
+            try {
+                configuration1 = new ACO(Double.parseDouble(args[0]), Double.parseDouble(args[0]), Double.parseDouble(args[0]), Double.parseDouble(args[0]));
+            } catch (NullPointerException npe) {
+                System.out.println("I, Andrew Valancius, messed something up.");
+                npe.printStackTrace();
+            } catch (NumberFormatException nfe) {
+                System.out.println("The arguments given are formatted incorrectly.");
+            }
+        } else {
+            System.out.println("Incorrect number of arguments supplied.");
+            System.exit(0);
+        }
+    	
+        configuration1.run();
     }
 
+    
+    
 }
+
+

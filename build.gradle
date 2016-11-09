@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'eclipse'
 
 
 repositories {
@@ -13,6 +14,6 @@ dependencies {
 
 jar {
 	manifest {
-		attributes('Class-Path': configurations.compile.collect { "../../lib/"+it.getName() }.join(' '), 'Main-Class': 'a_star.aStar')
+		attributes('Class-Path': configurations.compile.collect { "../../lib/"+it.getName() }.join(' '), 'Main-Class': 'ACO.ACO')
 	}
 }
