@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class Ant {
 	ArrayList<Road> traversedLinks;
-	ArrayList<City> vistedCities;
+    ArrayList<City> vistedCities;
 	MiddleEarth map;
 	City start, goal, currentLocation;
 	double alpha, beta;
@@ -42,7 +42,9 @@ public class Ant {
 	
 	public void step() {
 	    
-	    
+	    // TODO need to fix this whole fucking method
+	    // start by pushing the list of probabilities into the City object and make it an array that doesn't care about duplicates
+	    // you can do this
 	    
 		// TODO make sure the ants try not to go back to a place they've already visited
 	    this.vistedCities.add(currentLocation);
@@ -61,7 +63,9 @@ public class Ant {
 		
 		
         for (Road r : roadsConnectedToMe) {
+            System.out.println(r.toString() + "level: " + r.getPheromoneLevel());
         	double tao =  Math.pow(r.getPheromoneLevel(), alpha);
+        	//if (0.000001 > tao) tao = 0.000001;
         	double ada =  Math.pow((1.0/ r.getDistance()), beta);
         	System.out.println("tao: " + tao + "  ada: " + ada);
         	weights.put(r, tao * ada);  
@@ -100,7 +104,7 @@ public class Ant {
         Collections.sort(ald);
         
         for (Double d : ald) {
-            orderedRoadMap.put(d, valueToRoad.get(d));
+            orderedRoadMap.put(d, valueToRoad.get(d)); // TODO value to road doesnt fucking work when there are duplicate paths lengths from a given city
         }
         
         int index = 0;
@@ -124,10 +128,10 @@ public class Ant {
         // now intervals[] should be populated
         
         double roll = rand.nextDouble();
-        //System.out.println("Roll: " + roll);
+        System.out.println("Roll: " + roll);
         for (Double d : intervals) {
-            //System.out.println(d);
-        }
+            System.out.println(d);
+        } // debug
         
         
         for (int i = 0; i < roads.size(); i++) {
@@ -137,6 +141,10 @@ public class Ant {
                 break;
             }
         }
+        if (nextRoad == null) {
+            nextRoad = roads.get(rand.nextInt(roads.size()));
+        }
+        
         // nextRoad now contains the next road I want to move to
         
 		
@@ -151,6 +159,9 @@ public class Ant {
 						
 	}
 	
+	public ArrayList<Road> getTraversedLinks() {
+        return traversedLinks;
+    }
 	
 	public void purge() {
 	    this.traversedLinks.clear();

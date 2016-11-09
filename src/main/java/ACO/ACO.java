@@ -144,12 +144,19 @@ public class ACO {
 
     public void initPheromones() {
     	for (Road r : this.antMap.getAllRoads()) {
-    	    r.setPheromoneLevel(rand.nextDouble() * 3.0); // TODO Is this correct?
+    	    //r.setPheromoneLevel(rand.nextDouble() * 3.0); // TODO Is this correct?
+    	    r.setPheromoneLevel(2.0000000000000);
     	}	
     }
     
-    public void applyPheromones() {
+    public void applyPheromones(ArrayList<Ant> ants) {
         // TODO apply the pheromones
+        for (Ant a : ants) {
+            double pheromonesPerRoad = this.q / a.getTraversedLinks().size();
+            for (Road r : a.getTraversedLinks()) {
+                r.setPheromoneLevel(r.getPheromoneLevel() + pheromonesPerRoad);
+            }
+        }
     }
     
     public void evaporatePheromones() {
@@ -182,9 +189,12 @@ public class ACO {
             for (Ant a : antPop) {
                 a.takeTrip();
             }
-            cycle++;
+            
+            this.applyPheromones(antPop);
+            
             this.evaporatePheromones();
             
+            cycle++;
         }
         
         System.out.println("we made it");

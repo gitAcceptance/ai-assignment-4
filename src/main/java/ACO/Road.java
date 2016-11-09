@@ -65,7 +65,11 @@ public class Road extends DefaultEdge {
     }
 
     public void setPheromoneLevel(double pheromoneLevel) {
-		this.pheromoneLevel = pheromoneLevel;
+        if (0.000001 > pheromoneLevel) {
+            this.pheromoneLevel = 0.000001;
+        } else {
+            this.pheromoneLevel = pheromoneLevel;
+        }
 	}
     
 	public double getPheromoneLevel() {
