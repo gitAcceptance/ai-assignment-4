@@ -73,7 +73,7 @@ public class City {
     *   
     **/
     public String toString() {
-        return "CITY NAME: " + cityName;
+        return cityName;
     }
 
 	public City getCameFrom() {

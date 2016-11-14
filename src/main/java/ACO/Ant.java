@@ -12,9 +12,13 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
+import com.sun.javafx.geom.AreaOp.AddOp;
+
 public class Ant {
+    ArrayList<Road> noFlyListRoads;
+    ArrayList<City> noFlyListCity;
 	ArrayList<Road> traversedLinks;
-    ArrayList<City> vistedCities;
+    ArrayList<City> visitedCities;
 	MiddleEarth map;
 	City start, goal, currentLocation;
 	double alpha, beta;
@@ -22,7 +26,8 @@ public class Ant {
 	
 	public Ant(City start, City goal, MiddleEarth m, double alpha, double beta) {
 		traversedLinks = new ArrayList<Road>();
-		vistedCities = new ArrayList<City>();
+		visitedCities = new ArrayList<City>();
+		visitedCities.add(start);
 		this.start = start;
 		this.currentLocation = start;
 		this.goal = goal;
@@ -30,24 +35,51 @@ public class Ant {
 		this.alpha = alpha;
 		this.beta = beta;
 		this.rand = new Random();
+		this.noFlyListRoads = new ArrayList<Road>();
+		this.noFlyListCity = new ArrayList<City>();
 	}
 	
 
 	public void takeTrip() {
-	    if (this.vistedCities.size() == 100) return;
 	    while (currentLocation != goal) {
+	        //System.out.println("Step Number " + this.traversedLinks.size());
+	        if (this.traversedLinks.size() == 1000) return;
+	        //System.out.println();
+	        for (City c : this.visitedCities) {
+	            //System.out.print(c.toString() + " -> ");
+	        }
+	        //System.out.println();
 	        this.step();
 	    }
 	}
 	
+	
+	private Road getSmelliestRoadConnectedToMe() {
+	    HashSet<Road> roadsConnectedToMe = map.getRoads(currentLocation);
+	    Road smelliestRoad = null;
+	    for (Road r : roadsConnectedToMe) {
+	        if (smelliestRoad == null) {
+	            smelliestRoad = r;
+	        }
+	        if (smelliestRoad.getPheromoneLevel() < r.getPheromoneLevel()) {
+	            smelliestRoad = r;
+	        }
+	    }
+	    return smelliestRoad;
+	}
+	
+	
 	public void step() {
 	    
 	    // TODO need to fix this whole fucking method
-	    // start by pushing the list of probabilities into the City object and make it an array that doesn't care about duplicates
+	    // start by pushing the list of probabilities into the Road object and make it an array that doesn't care about duplicates
 	    // you can do this
 	    
 		// TODO make sure the ants try not to go back to a place they've already visited
-	    this.vistedCities.add(currentLocation);
+	    
+	    
+	    
+	    
 	    
 		HashSet<Road> roadsConnectedToMe = map.getRoads(currentLocation);
 		LinkedHashMap<Double, Road> orderedRoadMap = new LinkedHashMap<Double, Road>();
@@ -63,11 +95,10 @@ public class Ant {
 		
 		
         for (Road r : roadsConnectedToMe) {
-            System.out.println(r.toString() + "level: " + r.getPheromoneLevel());
+            //System.out.println(r.toString() + "level: " + r.getPheromoneLevel());
         	double tao =  Math.pow(r.getPheromoneLevel(), alpha);
-        	//if (0.000001 > tao) tao = 0.000001;
         	double ada =  Math.pow((1.0/ r.getDistance()), beta);
-        	System.out.println("tao: " + tao + "  ada: " + ada);
+        	//System.out.println("tao: " + tao + "  ada: " + ada);
         	weights.put(r, tao * ada);  
 		}
         
@@ -77,17 +108,16 @@ public class Ant {
             denominator += weights.get(r); 
         }
         
-
-        
         		
         // does the probability calculation and stores the probability  
         // to choose each possible road into the Map of probabilities
         for (Road r : roadsConnectedToMe) {
             probabilities.put(r, (weights.get(r) / denominator));
+            r.setCurrentProbability(weights.get(r) / denominator);
         }
         
         for (Double d: probabilities.values()) {
-            System.out.println(d);
+            //System.out.println(d);
         }
         
         
@@ -97,43 +127,133 @@ public class Ant {
             valueToRoad.put(probabilities.get(r), r);
         }
         
-        ArrayList<Double> ald = new ArrayList<Double>();
-        for (Double d : probabilities.values()) {
-            ald.add(d);
+        ArrayList<Road> alr = new ArrayList<Road>();
+        for (Road r : roadsConnectedToMe) {
+            if (this.noFlyListRoads.contains(r)) {
+                continue;
+            } else if (this.noFlyListCity.contains(r.getTarget())) {
+                continue;
+                
+                
+            } else {
+                alr.add(r);
+            }
         }
-        Collections.sort(ald);
+        Collections.sort(alr);
         
-        for (Double d : ald) {
-            orderedRoadMap.put(d, valueToRoad.get(d)); // TODO value to road doesnt fucking work when there are duplicate paths lengths from a given city
-        }
+        
+       
         
         int index = 0;
-        for (Road r : orderedRoadMap.values()) {
+        for (Road r : alr) {
             roads.add(index, r);
             index++;
         }
         // So roads is now populated with the correct ordering of the roads
+        
+        if (roads.size() == 0) {
+            this.noFlyListRoads.clear();
+            this.noFlyListCity.clear();
+            //System.out.println("cleared");
+            return;
+        }
         
         
         // time to populate intervals[]
         for (int i = 0; i < roads.size(); i++) {
             //System.out.println(probabilities.get(roads.get(i)));
             if (i == 0) {
-                intervals[i] = probabilities.get(roads.get(i));
-                
+                //intervals[i] = probabilities.get(roads.get(i));
+                intervals[i] = roads.get(i).getCurrentProbability();
             } else {
-                intervals[i] = intervals[i-1] + probabilities.get(roads.get(i));
+                //intervals[i] = intervals[i-1] + probabilities.get(roads.get(i));
+                intervals[i] = intervals[i-1] + roads.get(i).getCurrentProbability();
             }
         }
         // now intervals[] should be populated
         
-        double roll = rand.nextDouble();
-        System.out.println("Roll: " + roll);
-        for (Double d : intervals) {
-            System.out.println(d);
-        } // debug
+        
+        nextRoad = rollForNextRoad(intervals, roads);
+        /*
+        if (noFlyList.contains(nextRoad)) {
+            for (Road r : roadsConnectedToMe) {
+                if (!noFlyList.contains(r)) {
+                    nextRoad = r;
+                    break;
+                }
+            }
+        }
+        */
+        // nextRoad now contains the next road I want to move to
+        
+        boolean iHaveTakenAllPaths = true;
+        for (Road r : roadsConnectedToMe) {
+            if (!traversedLinks.contains(r)) {
+                iHaveTakenAllPaths = false;
+                break;
+            }
+        }
+        /*
+        if (traversedLinks.contains(nextRoad) && !iHaveTakenAllPaths) {
+            for (Road r : roadsConnectedToMe) {
+                if (!traversedLinks.contains(r)) {
+                    nextRoad = r;
+                    break;
+                }
+            }
+        }
+        */
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // NOTE: Don't edit anything below this.
+		// This part ensures I select the correct next city.
+		City nextCity = nextRoad.getSource();
+		if (nextCity.equals(currentLocation)) {
+			nextCity = nextRoad.getTarget();
+		}
+		
+		//System.out.println("City name: \"" + nextCity.getCityName() + "\"");
+		if (nextCity.getCityName().equals("Isengard") || nextCity.getCityName().equals("Lothlorien") || nextCity.getCityName().equals("Dol_Guldur")) {
+		    return;
+		}
+		
+		noFlyListRoads.add(nextRoad);
+		noFlyListCity.add(nextCity);
+		
+		
+		this.visitedCities.add(nextCity);
+        this.currentLocation = nextCity;
+        traversedLinks.add(nextRoad);
+        
+		
+		for (Road r : roadsConnectedToMe) {
+            r.clearProbability();
+        }
+		
+		
+						
+	}
+	
+	private Road rollForNextRoad(Double[] intervals, ArrayList<Road> roads) {
+	    double roll = rand.nextDouble();
+	    Road nextRoad = null;
+	    
         for (int i = 0; i < roads.size(); i++) {
             Double d = intervals[i];
             if (roll < d) {
@@ -142,21 +262,11 @@ public class Ant {
             }
         }
         if (nextRoad == null) {
+            //System.out.println(roads.size());
             nextRoad = roads.get(rand.nextInt(roads.size()));
         }
         
-        // nextRoad now contains the next road I want to move to
-        
-		
-		// This part ensures I select the correct next city.
-		City nextCity = nextRoad.getSource();
-		if (nextCity.equals(currentLocation)) {
-			nextCity = nextRoad.getTarget();
-		}
-		this.currentLocation = nextCity;
-		
-		traversedLinks.add(nextRoad);
-						
+        return nextRoad;
 	}
 	
 	public ArrayList<Road> getTraversedLinks() {
@@ -165,7 +275,7 @@ public class Ant {
 	
 	public void purge() {
 	    this.traversedLinks.clear();
-        this.vistedCities.clear();
+        this.visitedCities.clear();
 	}
 	
 	public boolean isAtGoal() {

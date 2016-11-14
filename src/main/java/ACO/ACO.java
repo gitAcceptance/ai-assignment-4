@@ -145,7 +145,7 @@ public class ACO {
     public void initPheromones() {
     	for (Road r : this.antMap.getAllRoads()) {
     	    //r.setPheromoneLevel(rand.nextDouble() * 3.0); // TODO Is this correct?
-    	    r.setPheromoneLevel(2.0000000000000);
+    	    r.setPheromoneLevel(100.0000000000000);
     	}	
     }
     
@@ -153,6 +153,9 @@ public class ACO {
         // TODO apply the pheromones
         for (Ant a : ants) {
             double pheromonesPerRoad = this.q / a.getTraversedLinks().size();
+            
+            if (a.getTraversedLinks().size() > 30) continue;
+            
             for (Road r : a.getTraversedLinks()) {
                 r.setPheromoneLevel(r.getPheromoneLevel() + pheromonesPerRoad);
             }
@@ -181,9 +184,10 @@ public class ACO {
 
         int cycle = 0;
         
-        while (cycle < 25) {
+        while (cycle < 10000) {
             antPop.clear();
             for (int i = 0; i < 10; i++) { // add 10 ants to the population
+                // TODO don't forget this is set to one ant
                 antPop.add(new Ant(this.cities.get("Blue_Mountains"), this.cities.get("Iron_Hills"), antMap, alpha, beta));
             }
             for (Ant a : antPop) {
@@ -191,8 +195,16 @@ public class ACO {
             }
             
             this.applyPheromones(antPop);
+            System.out.println();
+            for (Road r : this.antMap.getAllRoads()) {
+                //System.out.println(r.getSource().toString() + " <-" + r.getPheromoneLevel() + "-> " + r.getTarget().toString());
+            }
             
             this.evaporatePheromones();
+            System.out.println();
+            for (Road r : this.antMap.getAllRoads()) {
+                System.out.println(r.getSource().toString() + " <-" + r.getPheromoneLevel() + "-> " + r.getTarget().toString());
+            }
             
             cycle++;
         }
@@ -203,7 +215,8 @@ public class ACO {
         int antLabel = 1;
         for (Ant a : antPop) {
             System.out.println("Ant " + antLabel + ": ");
-            for (City c : a.vistedCities) {
+            System.out.println("Path length: " + a.visitedCities.size());
+            for (City c : a.visitedCities) {
                 System.out.print(c.toString() + " -> ");
             }
             antLabel++;
@@ -214,6 +227,10 @@ public class ACO {
         
         // TODO log the path
         
+        
+        
+        
+        
     }
 
     public static void main(String[] args) {
@@ -222,7 +239,7 @@ public class ACO {
     	
         if (args.length == 4) {
             try {
-                configuration1 = new ACO(Double.parseDouble(args[0]), Double.parseDouble(args[0]), Double.parseDouble(args[0]), Double.parseDouble(args[0]));
+                configuration1 = new ACO(Double.parseDouble(args[0]), Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
             } catch (NullPointerException npe) {
                 System.out.println("I, Andrew Valancius, messed something up.");
                 npe.printStackTrace();
@@ -233,7 +250,7 @@ public class ACO {
             System.out.println("Incorrect number of arguments supplied.");
             System.exit(0);
         }
-    	
+    	//System.out.println(configuration1.alpha + ", " + configuration1.beta + ", " + configuration1.rho + ", " + configuration1.q);
         configuration1.run();
     }
 

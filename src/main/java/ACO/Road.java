@@ -10,10 +10,11 @@ package ACO;
 
 import org.jgrapht.graph.DefaultEdge;
 
-public class Road extends DefaultEdge {
+public class Road extends DefaultEdge implements Comparable<Road> {
     
     private final int distance;
     private double pheromoneLevel;
+    private double currentProbability;
 
     /**
      * 
@@ -31,10 +32,22 @@ public class Road extends DefaultEdge {
     public Road(int d) {
         this.distance = d;
         this.pheromoneLevel = 0;
-
+        this.currentProbability = 0;
     }
     
-	/**
+	public double getCurrentProbability() {
+        return currentProbability;
+    }
+
+    public void setCurrentProbability(double currentProbability) {
+        this.currentProbability = currentProbability;
+    }
+    
+    public void clearProbability() {
+        this.currentProbability = 0;
+    }
+
+    /**
     *   Get the city of where the road started
     *
     *   @return The source city
@@ -57,7 +70,7 @@ public class Road extends DefaultEdge {
     }
     
     public void evaporate(double rho) {
-    	this.pheromoneLevel = this.pheromoneLevel * (1.0 - rho);    	
+    	this.pheromoneLevel = this.pheromoneLevel * (1.0d - rho);    	
     }
 
     public int getDistance() {
@@ -65,16 +78,22 @@ public class Road extends DefaultEdge {
     }
 
     public void setPheromoneLevel(double pheromoneLevel) {
-        if (0.000001 > pheromoneLevel) {
-            this.pheromoneLevel = 0.000001;
-        } else {
             this.pheromoneLevel = pheromoneLevel;
-        }
 	}
     
 	public double getPheromoneLevel() {
 		return pheromoneLevel;
 	}
 
-    
+    @Override
+    public int compareTo(Road otherRoad) {
+        if (this.currentProbability > otherRoad.currentProbability) {
+            return -1;
+        } else if (this.currentProbability < otherRoad.currentProbability) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+	
 }
