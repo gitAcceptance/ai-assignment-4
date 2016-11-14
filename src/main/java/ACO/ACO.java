@@ -1,7 +1,9 @@
 
 package ACO;
 
+import java.io.FileWriter;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -184,7 +186,7 @@ public class ACO {
 
         int cycle = 0;
         
-        while (cycle < 10000) {
+        while (cycle < 100) {
             antPop.clear();
             for (int i = 0; i < 10; i++) { // add 10 ants to the population
                 // TODO don't forget this is set to one ant
@@ -210,25 +212,53 @@ public class ACO {
         }
         
         System.out.println("we made it");
-        
-        
+        FileWriter fw = null;
+        PrintWriter writer = null;
+        try {
+            fw = new FileWriter("output.txt", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
         int antLabel = 1;
         for (Ant a : antPop) {
+            if (antLabel == 1) {
+                try {
+                    writer = new PrintWriter(fw);
+                    writer.println("*************************************************");
+                    writer.println("Alpha:" + this.alpha + " Beta:" + this.beta + " Rho:" + this.rho);
+                    writer.println("Path length: " + a.visitedCities.size());
+                    for (int i = 0; i < a.visitedCities.size(); i++) {
+                        if (!(i == a.visitedCities.size() - 1)) {
+                            writer.print(a.visitedCities.get(i) + " -> ");
+                        } else {
+                            writer.print(a.visitedCities.get(i));
+                        }
+                    }
+                    writer.println();
+                }
+                catch (Exception e) {
+                    System.out.println("output.txt not created");
+                    e.printStackTrace();
+                }
+            }
+            
+            
+            
             System.out.println("Ant " + antLabel + ": ");
             System.out.println("Path length: " + a.visitedCities.size());
-            for (City c : a.visitedCities) {
-                System.out.print(c.toString() + " -> ");
+            for (int i = 0; i < a.visitedCities.size(); i++) {
+                if (!(i == a.visitedCities.size() - 1)) {
+                    System.out.print(a.visitedCities.get(i) + " -> ");
+                } else {
+                    System.out.print(a.visitedCities.get(i));
+                }
             }
             antLabel++;
             System.out.println();
         }
         
-        // TODO print out the path
-        
-        // TODO log the path
-        
-        
-        
+        writer.close();
         
         
     }

@@ -1,0 +1,110 @@
+*************************************************
+Alpha:0.4 Beta:1.0 Rho:0.65
+Path length: 11
+Blue_Mountains -> Lake_Evendim -> Fornost -> Weathertop -> Rivendell -> North_Pass -> Carrock -> Erebor -> Dale -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:0.4 Beta:1.0 Rho:0.65
+Path length: 17
+Blue_Mountains -> Grey_Havens -> White_Towers -> Hobbiton -> Michel_Delving -> Lake_Evendim -> Fornost -> Bree -> Sarn_Ford -> Isengard -> Dol_Guldur -> Carrock -> Wood_Elves -> Dale -> Erebor -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:0.4 Beta:1.0 Rho:0.65
+Path length: 11
+Blue_Mountains -> Lake_Evendim -> Fornost -> Rivendell -> Caradhras -> Carrock -> Wood_Elves -> Dale -> Erebor -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:0.4 Beta:1.0 Rho:0.65
+Path length: 15
+Blue_Mountains -> Grey_Havens -> White_Towers -> Hobbiton -> Sarn_Ford -> Bree -> Weathertop -> Rivendell -> Caradhras -> Carrock -> Wood_Elves -> Dale -> Erebor -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:0.4 Beta:1.0 Rho:0.65
+Path length: 14
+Blue_Mountains -> Lake_Evendim -> Michel_Delving -> Hobbiton -> Brandy_Hall -> Bree -> Weathertop -> Rivendell -> North_Pass -> Carrock -> Erebor -> Dale -> Esgaroth -> Iron_Hills
+*************************************************
+*************************************************
+*************************************************
+Alpha:1.0 Beta:0.4 Rho:0.65
+Path length: 12
+Blue_Mountains -> Michel_Delving -> Lake_Evendim -> Fornost -> Rivendell -> Caradhras -> Carrock -> Wood_Elves -> Erebor -> Dale -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:0.4 Rho:0.65
+Path length: 11
+Blue_Mountains -> Grey_Havens -> Sarn_Ford -> Weathertop -> Rivendell -> North_Pass -> Carrock -> Wood_Elves -> Dale -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:0.4 Rho:0.65
+Path length: 12
+Blue_Mountains -> Michel_Delving -> Hobbiton -> Brandy_Hall -> Bree -> Weathertop -> Rivendell -> North_Pass -> Carrock -> Esgaroth -> Dale -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:0.4 Rho:0.65
+Path length: 12
+Blue_Mountains -> Grey_Havens -> White_Towers -> Michel_Delving -> Lake_Evendim -> Fornost -> Rivendell -> North_Pass -> Carrock -> Erebor -> Dale -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:0.4 Rho:0.65
+Path length: 16
+Blue_Mountains -> Grey_Havens -> White_Towers -> Michel_Delving -> Hobbiton -> Bree -> Weathertop -> Sarn_Ford -> Rivendell -> Caradhras -> Carrock -> Wood_Elves -> Erebor -> Dale -> Esgaroth -> Iron_Hills
+*************************************************
+*************************************************
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.65
+Path length: 12
+Blue_Mountains -> Lake_Evendim -> Fornost -> Weathertop -> Rivendell -> Caradhras -> Carrock -> Wood_Elves -> Erebor -> Dale -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.65
+Path length: 12
+Blue_Mountains -> White_Towers -> Michel_Delving -> Hobbiton -> Brandy_Hall -> Bree -> Weathertop -> Rivendell -> North_Pass -> Carrock -> Erebor -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.65
+Path length: 11
+Blue_Mountains -> Lake_Evendim -> Fornost -> Rivendell -> North_Pass -> Carrock -> Wood_Elves -> Erebor -> Dale -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.65
+Path length: 10
+Blue_Mountains -> Lake_Evendim -> Fornost -> Bree -> Weathertop -> Rivendell -> Caradhras -> Carrock -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.65
+Path length: 10
+Blue_Mountains -> Lake_Evendim -> Fornost -> Rivendell -> Caradhras -> Carrock -> Wood_Elves -> Dale -> Erebor -> Iron_Hills
+*************************************************
+*************************************************
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.4
+Path length: 14
+Blue_Mountains -> Grey_Havens -> White_Towers -> Michel_Delving -> Brandy_Hall -> Bree -> Weathertop -> Rivendell -> Caradhras -> Carrock -> Erebor -> Dale -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.4
+Path length: 8
+Blue_Mountains -> Grey_Havens -> Sarn_Ford -> Rivendell -> Caradhras -> Carrock -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.4
+Path length: 14
+Blue_Mountains -> Grey_Havens -> White_Towers -> Hobbiton -> Brandy_Hall -> Bree -> Weathertop -> Rivendell -> Caradhras -> Carrock -> Esgaroth -> Dale -> Erebor -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.4
+Path length: 13
+Blue_Mountains -> Grey_Havens -> Sarn_Ford -> Bree -> Weathertop -> Rivendell -> North_Pass -> Carrock -> Wood_Elves -> Dale -> Erebor -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.4
+Path length: 14
+Blue_Mountains -> Grey_Havens -> White_Towers -> Michel_Delving -> Hobbiton -> Brandy_Hall -> Bree -> Fornost -> Rivendell -> North_Pass -> Carrock -> Erebor -> Dale -> Iron_Hills
+*************************************************
+*************************************************
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.95
+Path length: 13
+Blue_Mountains -> Michel_Delving -> White_Towers -> Grey_Havens -> Sarn_Ford -> Isengard -> Lothlorien -> Caradhras -> Rivendell -> North_Pass -> Carrock -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.95
+Path length: 13
+Blue_Mountains -> Grey_Havens -> White_Towers -> Michel_Delving -> Hobbiton -> Bree -> Weathertop -> Rivendell -> North_Pass -> Carrock -> Wood_Elves -> Erebor -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.95
+Path length: 12
+Blue_Mountains -> Lake_Evendim -> Michel_Delving -> Hobbiton -> Bree -> Weathertop -> Rivendell -> Moria -> Lothlorien -> Gladden_Fields -> Esgaroth -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.95
+Path length: 12
+Blue_Mountains -> Michel_Delving -> White_Towers -> Grey_Havens -> Sarn_Ford -> Weathertop -> Rivendell -> North_Pass -> Carrock -> Wood_Elves -> Dale -> Iron_Hills
+*************************************************
+Alpha:1.0 Beta:1.0 Rho:0.95
+Path length: 11
+Blue_Mountains -> Michel_Delving -> Hobbiton -> Brandy_Hall -> Bree -> Weathertop -> Rivendell -> Caradhras -> Carrock -> Esgaroth -> Iron_Hills
+*************************************************
+*************************************************

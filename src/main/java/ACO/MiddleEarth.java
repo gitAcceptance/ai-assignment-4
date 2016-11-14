@@ -99,6 +99,23 @@ public class MiddleEarth {
          HashSet<Road> roads = new HashSet<Road>(world.edgeSet());
          return roads;
      }
+     
+     /**
+      *   Returns a Hashset containing references the all cities connected to the given city
+      *   
+      *   @param location The city you want to know the neighbors of.
+      *
+      *   @return The hashset of all the cities connected to the given city.
+      *   
+      **/
+      public HashSet<City> getAllCitiesConnectedTo(City location) {
+          HashSet<City> cities = new HashSet<City>();
+          for (Road r : world.edgesOf(location)) {
+              cities.add(r.getSource());
+              cities.add(r.getTarget());
+          }
+          return cities;
+      }
     
     /**
      *   Returns the number of cities on the map
