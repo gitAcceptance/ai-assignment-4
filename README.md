@@ -1,8 +1,8 @@
-# Artificial Intelligence Assignment 4
 # ACO - Getting lost in Middle-Earth
 
 # Run script (Recommended)
-## Runs everything and dumps output in output.txt
+Runs everything and dumps output in output.txt
+
 1. Type `chmod +x runAll.sh`
 2. Type `./runAll.sh`
 
