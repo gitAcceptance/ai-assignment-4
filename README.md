@@ -16,6 +16,5 @@ etc...
 ## Where are the input files?
 They are placed in /src/main/java/resources
 
-## Submiting project
-On the lab machines, run `submit 421 *` to submit everything.
+
 
